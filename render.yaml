@@ -1,0 +1,42 @@
+services:
+  - type: web
+    name: voco-api
+    runtime: node
+    plan: starter
+    rootDir: api
+    buildCommand: pnpm install && pnpm build
+    startCommand: pnpm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false # Configure in Render Dashboard with MongoDB Atlas connection string
+      - key: MONGODB_DB_NAME
+        value: voco
+      - key: SENTRY_DSN
+        sync: false # Configure in Render Dashboard with Sentry DSN
+      - key: SENTRY_ENVIRONMENT
+        value: production
+      - key: SENTRY_TRACES_SAMPLE_RATE
+        value: "1.0"
+      - key: SENTRY_PROFILES_SAMPLE_RATE
+        value: "1.0"
+      - key: ELEVENLABS_API_KEY
+        sync: false # Configure in Render Dashboard with ElevenLabs API key
+      - key: ELEVENLABS_VOICE_ID
+        value: 21m00Tcm4TlvDq8ikWAM # Rachel - Professional & Energetic
+      - key: ELEVENLABS_MODEL_ID
+        value: eleven_multilingual_v2
+      - key: OPENWEIGHT_AI_API_URL
+        sync: false # Configure in Render Dashboard (e.g. https://llama3-instance.onrender.com/v1/chat/completions)
+      - key: OPENWEIGHT_AI_MODEL
+        value: meta-llama/Meta-Llama-3-8B-Instruct
+      - key: OPENWEIGHT_AI_TIMEOUT_MS
+        value: "6000"
+      - key: OPENWEIGHT_AI_API_KEY
+        sync: false
+      - key: CORS_ORIGIN
+        value: "*"
